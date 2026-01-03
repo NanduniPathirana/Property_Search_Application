@@ -1,8 +1,22 @@
 //Main react component for the property search application
 import { useState } from "react";
+
 function App() {
   //Store selected property type
   const [propertyType, setPropertyType] = useState("any")
+  //Store minimum price
+  const [minPrice, setMinPrice] = useState("");
+  //Store maximum price
+  const [maxPrice, setMaxPrice] = useState("");
+  //Store minimum bedrooms
+  const [minBedrooms, setMinBedrooms] = useState("");
+  //Store maximum bedrooms
+  const [maxBedrooms, setMaxBedrooms] = useState("");
+  //Store the selected date
+  const [dateAdded, setDateAdded] = useState("");
+  //Store the postcode
+  const [postCode, setPostcode] = useState("");
+
   return (
     //Main container for the search pages
     <div className="app">
@@ -22,10 +36,15 @@ function App() {
             Property Type
           </label>
 
-          <select id="propertyType" name="propertyType">
-            <option value="house">House</option>
-            <option value="flay">Flat</option>
-            <option value="any">Any</option>
+          <select 
+              id="propertyType" 
+              name="propertyType"
+              value={propertyType}
+              onChange={ (e) => setPropertyType(e.target.value)}
+          >
+              <option value="house">House</option>
+              <option value="flay">Flat</option>
+              <option value="any">Any</option>
           </select>
         </div>
 
@@ -38,6 +57,8 @@ function App() {
              id="minPrice"
              name="minPrice"
              placeholder="Min Price"
+             value={minPrice}
+             onChange={ (e) => setMinPrice(e.target.value)}
           />
 
           {/* Maximum price input */}
@@ -47,6 +68,8 @@ function App() {
              id="maxPrice"
              name="maxPrice"
              placeholder="Max Price"
+             value={maxPrice}
+             onChange={ (e) => setMaxPrice(e.target.value)}
           />
         </div>
 
@@ -59,6 +82,8 @@ function App() {
              id="minBedrooms"
              name="minBedrooms"
              placeholder="Min Bedrooms"
+             value={minBedrooms}
+             onChange={ (e) => setMinBedrooms(e.target.value)}
           />
 
           {/* Maximum bedrooms input */}
@@ -68,6 +93,8 @@ function App() {
              id="maxBedrooms"
              name="maxBedrooms"
              placeholder="Max Bedrooms"
+             value={maxBedrooms}
+             onChange={ (e) => setMaxBedrooms(e.target.value)}
           />
         </div>
 
@@ -79,6 +106,8 @@ function App() {
              type="date"
              id="dateAdded"
              name="dateAdded"
+             value={dateAdded}
+             onChange={ (e) => setDateAdded(e.target.value)}
           />
         </div>
 
@@ -90,9 +119,10 @@ function App() {
              id="postcode"
              name="postcode"
              placeholder="e.g.-BR1, NW1"
+             value={postcode}
+             onChange={ (e) => setPostcode(e.target.value)}
           />
         </div>
-
       </form>
 
     </div>
