@@ -1,5 +1,8 @@
 //Main react component for the property search application
+import { useState } from "react";
 function App() {
+  //Store selected property type
+  const [propertyType, setPropertyType] = useState("any")
   return (
     //Main container for the search pages
     <div className="app">
@@ -89,7 +92,6 @@ function App() {
              placeholder="e.g.-BR1, NW1"
           />
         </div>
-
 
       </form>
 
