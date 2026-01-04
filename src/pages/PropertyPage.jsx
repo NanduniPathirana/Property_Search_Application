@@ -2,12 +2,17 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 
 //Property page component
-function PropertyPage({properties}) {
+function PropertyPage({properties, favourites, setFavourites}) {
     // Get property id
     const { id } = useParams();
 
     //Find the selected property from JSON data
     const property = properties.find((p) => p.id === id);
+
+    //if property is not found
+    if (!property) {
+        return <p>Property not found.</p>;
+    }
 
     //State for control the main displayed image
     const [mainImage, setMainImage] = useState(property.picture);
@@ -15,13 +20,38 @@ function PropertyPage({properties}) {
     //State for control which tab is active
     const [activeTab, setActiveTab] = useState("description");
 
-    //State for handle favourite button
-    const [isFavourite, setIsFavourite] = useState(false);
+    //check if property is already favourite
+    const isFavourite = favourites.some((fav) => fav.id === property.id);
 
-    //if property is not found
-    if (!property) {
-        return <p>Property not found.</p>;
-    }
+    //Add to favourites (only once)
+    const addToFavourites = () => {
+        if (!isFavourite) {
+            setFavourites([...favourites, property]);
+        }
+    };
+
+    //Remove from favourites
+    const removeFromFavourites = () => {
+        setFavourites(favourites.filter((fav) => fav.id !== property.id));
+    };
+
+    //Clear all favourites
+    const clearFavourites = () => {
+        setFavourites([]);
+    };
+
+    //Drag start handler
+    const handleDragStart = (e) => {
+        e.dataTransfer.setData("propertyId", property.id);
+    };
+
+    //Drop handler(remove when dragged out)
+    const handleDropRemove = (e) => {
+        const draggedId = e.dataTransfer.getData("propertyId");
+        if (draggedId === property.id) {
+            removeFromFavourites();
+        }
+    };
 
     return (
         <div className="property-page">
@@ -51,16 +81,33 @@ function PropertyPage({properties}) {
                 <h2>{property.type}</h2>
                 <h3>{property.price.toLocaleString()}</h3>
                 <p>{property.location}</p>
-            </div>
+            
 
                 {/*Favourite Button*/}
-                <button 
-                    className="favourite-btn"
-                    onClick={() => setIsFavourite(true)}
-                    disabled={isFavourite}
-                >
-                    {isFavourite ? "Added to Favourites": "Add to Favourites"}
-                </button>
+                {!isFavourite ? (
+                    <button onClick={addToFavourites}>
+                        ❤️ Add to Favourites
+                    </button>
+                ) : (
+                  <button onClick={removeFromFavourites}>
+                    ❌ Remove from Favourites 
+                  </button>
+                )}
+
+                {favourites.length > 0 && (
+                    <button onClick={clearFavourites}>
+                        Clear All Favourites
+                    </button>
+                )}
+            </div>
+
+            <div 
+               className="remove-drop-zone"
+               onDragOver={(e) => e.preventDefault()}
+               onDrop={handleDropRemove}
+            >
+                Drag here to remove from favourites
+            </div>
             
 
             {/*React tabs for description, floorplan, and map*/}
