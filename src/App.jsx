@@ -22,11 +22,55 @@ function App() {
   const [postCode, setPostcode] = useState("");
   //Store all properties from JSON file
   const [properties, setProperties] = useState([]);
+  //Store filtered search results
+  const [filteredProperties, setFilteredProperties] = useState([]);
+
 
   useEffect(() => {
     //Load JSON data into state what app starts
     setProperties(propertiesData.properties);
   }, []);
+
+  //Create the search handler function 
+  const handleSearch = () => {
+    const results = properties.filter((property) => {
+
+      //Property type match
+      const matchType = propertyType === "any" || property.type.toLowerCase() === propertyType;
+
+      //Price match
+      const matchMinPrice = minPrice === "" || property.price >= Number(minPrice);
+      
+      const matchMaxPrice = maxPrice === "" || property.price <= Number(maxPrice);
+
+      //Bedrooms match
+      const matchMinBedrooms = minBedrooms === "" || property.bedrooms >= Number(minBedrooms);
+
+      const matchMaxBedrooms = maxBedrooms === "" || property.bedrooms <= Number(maxBedrooms);
+      
+      //Postcode match
+      const matchPostcode = postCode === "" || property.location.toLowerCase().includes(postCode.toLowerCase());
+
+      //Date match
+      const propertyDate = new Date(`${property.added.month} ${property.added.day}, ${property.added.year}`);
+
+      const matchDate = addedDate === "" || propertyDate >= new Date(addedDate);
+
+      //Return only if all conditions match
+      return (
+        matchType &&
+        matchMinPrice &&
+        matchMaxPrice &&
+        matchMinBedrooms &&
+        matchMaxBedrooms &&
+        matchPostcode &&
+        matchDate
+      );
+    })
+
+      //Saved filtered results
+      setFilteredProperties(results);
+  };
 
   return (
     //Main container for the search pages
@@ -54,7 +98,7 @@ function App() {
               onChange={ (e) => setPropertyType(e.target.value)}
           >
               <option value="house">House</option>
-              <option value="flay">Flat</option>
+              <option value="flat">Flat</option>
               <option value="any">Any</option>
           </select>
         </div>
@@ -134,6 +178,12 @@ function App() {
              onChange={ (e) => setPostcode(e.target.value)}
           />
         </div>
+
+        {/* Search Button*/}
+        <button type="button" onClick={handleSearch}>
+          Search Properties
+        </button>
+
       </form>
 
     </div>
