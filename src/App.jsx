@@ -21,7 +21,7 @@ function App() {
     //Main container for the search pages
     <div className="app">
       <h1>Believe in Finding</h1>
-      <h2>with the SL's largest choice of properties </h2>
+      <h2>with the UK's largest choice of properties </h2>
 
       <p>
         Search properties to buy
@@ -119,7 +119,7 @@ function App() {
              id="postcode"
              name="postcode"
              placeholder="e.g.-BR1, NW1"
-             value={postcode}
+             value={postCode}
              onChange={ (e) => setPostcode(e.target.value)}
           />
         </div>

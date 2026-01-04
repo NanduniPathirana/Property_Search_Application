@@ -8,8 +8,18 @@
 			"tenure":"Freehold",
 			"description":"Attractive three bedroom semi-detached family home situated within 0.5 miles of Petts Wood station with fast trains to London and within easy walking distance of local shops, schools, bus routes and National Trust woodland. The property comprises; two receptions, fitted 18'9 x 10'1 kitchen/breakfast room and conservatory. The property also benefits from having a utility room and cloakroom. To the first floor there are three bedrooms and a family bathroom with separate WC. Additional features include double glazing, gas central heating and a well presented interior...",
 			"location":"Petts Wood Road, Petts Wood, Orpington BR5",
-			"picture":"images/prop1pic1small.jpg",
-			"url":"properties/prop1.html",
+			"picture":"images/Prop1pic1.png",
+            "images":[
+                "images/Prop1pic2.png",
+                "images/Prop1pic3.png",
+                "images/Prop1pic4.png",
+                "images/Prop1pic5.png",
+                "images/Prop1pic6.png",
+                "images/Prop1pic7.png",
+                "images/Prop1pic8.png"
+            ],
+            "floorPlan":"/images/Flooplan-Property 01.png",
+            "map":"https://maps.app.goo.gl/EUvC2twoAfb1mdub7",
             "added": {
                 "month":"October",
                 "day":12,
@@ -24,12 +34,156 @@
 			"tenure":"Freehold",
 			"description":"Presented in excellent decorative order throughout is this two double bedroom, two bathroom, garden flat. <br>The modern fitted kitchen is open plan to the living room which boasts solid wooden floors and includes integrated appliances including a dishwasher & a washing machine. This large open plan benefits from bi folding doors onto a secluded private courtyard garden. Both bedrooms are double sized, and the family bathroom boasts a matching three piece suite a shower attachment over the bath. There is also a separate wet room. There are walnut doors throughout and wiring for Sky TV/aerial points in the living room/kitchen and both bedrooms.<br>This apartment being only five years old, is still under a 10 year building guarantee...",
 			"location":"Crofton Road Orpington BR6",
-			"picture":"images/prop2pic1small.jpg",
-			"url":"properties/prop2.html",
+			"picture":"images/Prop2pic1.png",
+            "images":[
+                "images/Prop2pic2.png",
+                "images/Prop2pic3.png",
+                "images/Prop2pic4.png",
+                "images/Prop2pic5.png",
+                "images/Prop2pic6.png",
+                "images/Prop2pic7.png"
+            ],
+            "floorPlan":"/images/Flooplan-Property 02.png",
+            "map":"https://maps.app.goo.gl/vnUKLrnvHpWmMZce7",
             "added": {
                 "month":"September",
                 "day":14,
                 "year":2022
             }
+        },
+        {
+            "id":"prop3",
+            "type":"Flat",
+            "bedrooms":"3",
+            "price":"600000",
+            "tenure":"Leasehold",
+            "description":"This exceptional period garden apartment combines classic character with modern living in the prestigious Park Estate. Set on an elevated plot with leafy, tree-lined views, the property is arranged over two well-designed levels offering flexible accommodation. It features an elegant drawing room with bay window, high ceilings and feature fireplace, a study ideal for home working, and three bedrooms including a principal bedroom with en-suite. The lower level includes a modern breakfast kitchen with central island, a comfortable TV room, utility space and access to a spacious garage providing secure parking and additional storage. The property is leasehold with 961 years remaining and falls under Council Tax Band E",
+            "location":"Newcastle Drive, The Park NG7",
+            "picture":"images/Prop3pic1.png",
+            "images":[
+                "images/Prop3pic2.png",
+                "images/Prop3pic3.png",
+                "images/Prop3pic4.png",
+                "images/Prop3pic5.png",
+                "images/Prop3pic6.png",
+                "images/Prop3pic7.png"
+            ],
+            "floorPlan":"/images/Flooplan-Property 03.png",
+            "map":"https://maps.app.goo.gl/rmvwyfvcfKfZf7ci8",
+            "added":{
+                "month":"December",
+                "day": 28,
+                "year": 2025
+            }
+
+        },
+        {
+            "id":"prop4",
+            "type":"House",
+            "bedrooms":"5",
+            "price":"1350000",
+            "tenure":"Freehold",
+            "description":"This contemporary family home in Limpley Stoke, originally built in the 1950s and extended over time, offers modern living with stunning countryside views. The property features a bright double-height reception hall, spacious L-shaped sitting room with bay window and wood-burning stove, and sliding doors opening onto a landscaped garden with terrace. The kitchen/breakfast room is well-designed with modern units and bespoke seating, supported by a utility room, workshop, and double garage. Upstairs, the home provides five bedrooms, a study, and multiple bathrooms, including a principal suite with dual aspect views over the Limpley Stoke valley.",
+            "location":"Cliffe Drive, Limpley Stoke BA2",
+            "picture":"images/Prop4pic1.png",
+            "images":[
+                "images/Prop4pic2.png",
+                "images/Prop4pic3.png",
+                "images/Prop4pic4.png",
+                "images/Prop4pic5.png",
+                "images/Prop4pic6.png",
+                "images/Prop4pic7.png"
+
+            ],
+            "floorPlan":"/images/Flooplan-Property 04.png",
+            "map":"https://maps.app.goo.gl/ethTq3jssjAzr65AA",
+            "added":{
+                "month":"December",
+                "day": 30,
+                "year": 2025
+            }
+
+        },
+        {
+            "id":"prop5",
+            "type":"Flat",
+            "bedrooms":"2",
+            "price":"135000",
+            "tenure":"Leasehold",
+            "description":"This well-presented first-floor, two-bedroom purpose-built flat offers an excellent opportunity for buyers, with no onward chain and the benefit of allocated parking and a communal garden. Built in 1997, the property is located in St. Marys Close, within walking distance of St Marys Park and close to local amenities including Tesco and Friary Mill. The flat also benefits from a lease extension upon completion, making it a convenient and attractive option for first-time buyers or investors.",
+            "location":"St. Marys Close, Plymouth PL7",
+            "picture":"images/Prop5pic1.png",
+            "images":[
+                "images/Prop5pic2.png",
+                "images/Prop5pic3.png",
+                "images/Prop5pic4.png",
+                "images/Prop5pic5.png",
+                "images/Prop5pic6.png",
+                "images/Prop5pic7.png"
+
+            ],
+            "floorPlan":"/images/Flooplan-Property 05.png",
+            "map":"https://maps.app.goo.gl/5WzK4jje5a4kwhcr6",
+            "added":{
+                "month":"January",
+                "day": 1,
+                "year": 2026
+            }
+
+        },
+        {
+            "id":"prop6",
+            "type":"House",
+            "bedrooms":"4",
+            "price":"450000",
+            "tenure":"Freehold",
+            "description":"This impressive contemporary single-storey home offers spacious and well-designed living accommodation, set behind secure gates with a private courtyard garden. The bright reception room features high ceilings, large windows, and a central fireplace, creating a welcoming living space, while the modern kitchen is well equipped with ample storage, twin islands, and direct access to the courtyard, making it ideal for entertaining. The property provides excellent privacy with bedrooms separated from living areas, including a principal bedroom with ensuite bathroom and walk-in wardrobe, two further double bedrooms, and a guest bedroom with its own ensuite and garden access. Located on a sought-after residential street close to Wandsworth Common, local shops, schools, and excellent transport links, this home offers peaceful yet well-connected living",
+            "location":"Wandle Road, Wandsworth, London SW17",
+            "picture":"images/Prop6pic1.png",
+            "images":[
+                "images/Prop6pic2.png",
+                "images/Prop6pic3.png",
+                "images/Prop6pic4.png",
+                "images/Prop6pic5.png",
+                "images/Prop6pic6.png",
+                "images/Prop6pic7.png"
+
+            ],
+            "floorPlan":"/images/Flooplan-Property 06.png",
+            "map":"https://maps.app.goo.gl/im3yJnkPoo9e7aVm7",
+            "added":{
+                "month":"October",
+                "day": 24,
+                "year": 2025
+            }
+
+        },
+        {
+            "id":"prop7",
+            "type":"Flat",
+            "bedrooms":"2",
+            "price":"795000",
+            "tenure":"Leasehold",
+            "description":"This spacious two-bedroom apartment is located on the fifth floor of a secure modern development in the heart of Westminster and benefits from lift access. The property features an open-plan kitchen and reception area with floor-to-ceiling windows and access to a private balcony overlooking landscaped communal gardens. The main bedroom includes an en-suite shower room and fitted wardrobes, with a separate guest bathroom also available. Residents enjoy excellent facilities including a 24-hour concierge, secure underground parking, and leisure amenities such as a gym and spa, all within close proximity to major landmarks, transport links, and a wide range of shops and restaurants.",
+            "location":"Dolben Court, Montaigne Close, Westminster, London SW1P",
+            "picture":"images/Prop7pic1.png",
+            "images":[
+                "images/Prop7pic2.png",
+                "images/Prop7pic3.png",
+                "images/Prop7pic4.png",
+                "images/Prop7pic5.png",
+                "images/Prop7pic6.png",
+                "images/Prop7pic7.png"
+
+            ],
+            "floorPlan":"/images/Flooplan-Property 07.png",
+            "map":"https://maps.app.goo.gl/WEedmiEHchTtGUth8",
+            "added":{
+                "month":"September",
+                "day": 2,
+                "year": 2026
+            }
+
         }
+
 ]}
