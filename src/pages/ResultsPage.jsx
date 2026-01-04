@@ -1,16 +1,26 @@
 import { Link } from "react-router-dom";
 //Results page component
-function ResultsPage({filteredProperties}) {
-        // If no results found
+function ResultsPage({filteredProperties, favourites, setFavoourites}) {
+    
+        // Add property to favourites (only once)
+        const addToFavourites = (property) => {
+            const alreadyAdded = favourites.some((fav) => fav.id === property.id);
+
+            if (!alreadyAdded) {
+                setFavoourites([...favourites, property]);
+            }
+        };
+        // Handle case where no results are found
         if (!filteredProperties || filteredProperties.length === 0) {
             return (
                 <div className="results-page">
                     <h2>No properties found.</h2>
+                    {/* Link back to search page*/}
                     <Link to="/">Back to Search</Link>
                 </div>
             );
         }
-
+        //Display search results
         return (
             <div className="results-page">
                 <h2>Available Properties</h2>
@@ -19,7 +29,7 @@ function ResultsPage({filteredProperties}) {
                     {filteredProperties.map((property) => (
                         <div key={property.id} className="property-card">
 
-                            {/* Main image */}
+                            {/* Property Main image */}
                             <div className="property-image">
                                 <img 
                                    src={property.picture}
@@ -27,11 +37,11 @@ function ResultsPage({filteredProperties}) {
                                 />
                             </div>
 
-                            {/*Property details*/}
+                            {/*Property summary*/}
                             <div className="property-details">
                                 {/*Price*/}
                                 <h3 className="price">
-                                    {property.price.toLocalString()}
+                                    {property.price.toLocaleString()}
                                 </h3>
 
                                 {/*Property information*/}
@@ -46,13 +56,29 @@ function ResultsPage({filteredProperties}) {
                                     {property.description.substring(0,150)}...
                                 </p>
 
-                                {/*Link to property page*/}
-                                <Link
-                                   to={`/property/${property.id}`}
-                                   className="view-property-btn"
-                                >
-                                    View Property
-                                </Link>
+                                {/*Buttons*/}
+                                <div className="card-actions">
+
+                                    {/*Link to property page*/}
+                                    <Link
+                                       to={`/property/${property.id}`}
+                                    className="view-property-details"
+                                    >
+                                        View Property
+                                    </Link>
+
+                                    {/*Add to favourites button*/}
+                                    <button
+                                        className="fav-btn"
+                                        onClick={() => addToFavourites(property)}
+                                        disabled={favourites.some((fav) => fav.id === property.id)}
+                                    >
+                                        {favourites.some((fav) => fav.id === property.id)
+                                          ? "Added ❤️"
+                                          : "❤️ Add to Favourites"}
+                                        
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     ))}
