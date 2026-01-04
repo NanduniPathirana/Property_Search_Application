@@ -2,7 +2,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 //Search Page Component
-function SearchPage({ properties, setFilteredProperties}) {
+function SearchPage({ 
+    properties, 
+    setFilteredProperties,
+    favourites,
+    setFavourites
+}) {
+
     //React router hook for navigate
     const navigate = useNavigate();
 
@@ -67,10 +73,31 @@ function SearchPage({ properties, setFilteredProperties}) {
         //Navigate to results page
         navigate("/results")
     };
+        //Drag and Drop
+        const handleDragStart = (e, property) => {
+            e.dataTransfer.setData("propertyId", property.id);
+        };
+
+        const handleDropped = (e) => {
+            const propertyId = e.dataTransfer.getData("propertyId");
+            const draggedProperty = properties.find((p) => p.id === propertyId);
+            
+            if (
+              draggedProperty &&
+              !favourites.some((fav) => fav.id === draggedProperty.id)
+            ) {
+              setFavourites([...favourites, draggedProperty]);
+            }
+        };
+
+        const handleDropRemove = (e) => {
+           const propertyId = e.dataTransfer.getData("propertyId");
+           setFavourites(favourites.filter((fav) => fav.id !== propertyId));
+    };
 
     return (
         //Main container for the search pages
-        <div className="app">
+        <div className="seaech-page">
             <h1>Believe in Finding</h1>
             <h2>with the UK's largest choice of properties </h2>
 
@@ -175,6 +202,63 @@ function SearchPage({ properties, setFilteredProperties}) {
                 </button>
 
             </form>
+
+            {/*Drag source*/}
+            <h3>Drag a property into favourites</h3>
+
+            <div className="drag-source">
+                {properties.map((property) => (
+                    <div
+                       key={property.id}
+                       className="draggable-property"
+                       draggable
+                       onDragStart={(e) => handleDragStart(e, property)}
+                    >
+                       {property.type} – £{property.price.toLocaleString()}
+                    </div>
+                ))}
+            </div>
+
+            {/*FAVOURITES DROP ZONE*/}
+            <div
+                className="favourites-zone"
+                onDragOver={(e) => e.preventDefault()}
+                onDrop={handleDropAdd}
+            >
+
+                <h3>Favourites</h3>
+
+                {favourites.length === 0 && <p>No favourites yet</p>}
+
+                {favourites.map((fav) => (
+                    <div
+                        key={fav.id}
+                        className="favourite-item"
+                        draggable
+                        onDragStart={(e) =>
+                            e.dataTransfer.setData("propertyId", fav.id)
+                        }
+                        onDrop={handleDropRemove}
+                        onDragOver={(e) => e.preventDefault()}
+                    >
+                        {fav.type} – £{fav.price.toLocaleString()}
+
+                        <button
+                            onClick={() =>
+                                setFavourites(favourites.filter((f) => f.id !== fav.id))
+                            }
+                        >
+                            ❌
+                        </button>
+                    </div>
+                ))}
+
+                {favourites.length > 0 && (
+                    <button onClick={() => setFavourites([])}>
+                        Clear Favourites
+                    </button>
+                )}
+            </div>
 
         </div>
     );
