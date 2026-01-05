@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { sanitizePostcode, sanitizeNumber } from "../utils/security";
 
 //Search Page Component
 function SearchPage({ 
@@ -72,7 +73,32 @@ function SearchPage({
 
         //Navigate to results page
         navigate("/results")
+
+        // Clear all filters 
+        const handleClearFilters = () => {
+           setPropertyType("any");
+           setMinPrice("");
+           setMaxPrice("");
+           setMinBedrooms("");
+           setMaxBedrooms("");
+           setDateAdded("");
+           setPostcode("");
+        };
+
+        // Secure input handlers
+        const handlePostcodeChange = (e) => {
+            const sanitized = sanitizePostcode(e.target.value);
+            setPostcode(sanitized);
+        };
+
+        const handleNumberChange = (setter) => (e) => {
+            const value = e.target.value;
+            if (value === "" || (!isNaN(value) && Number(value) >= 0)) {
+                setter(value);
+            }
+        };
     };
+
 
     return (
         //Main container for the search pages
@@ -82,11 +108,13 @@ function SearchPage({
 
             <p>Search properties to buy</p>
 
-            {/* Collect user inputs to seearch properties*/}
+            {/* Collect user inputs to search properties*/}
             <form className="search-form">
                 {/* Allows user to specify the type of property */}
                 <div className="search-group">
-                    <label htmlFor="propertyType">Property Type</label>
+                    <label htmlFor="propertyType">
+                        <span className="label-icon">🏠</span> Property Type
+                    </label>
                     <select 
                        id="propertyType" 
                        name="propertyType"
@@ -102,26 +130,32 @@ function SearchPage({
                 {/* Allows user to specify the price range */}
                 <div className="search-group">
                     {/* Minimum price input */}
-                    <label htmlFor="minPrice">Minimum Price</label>
-                    <input
-                        type="number"
-                        id="minPrice"
-                        name="minPrice"
-                        placeholder="Min Price"
-                        value={minPrice}
-                        onChange={ (e) => setMinPrice(e.target.value)}
-                    />
-
-                    {/* Maximum price input */}
-                    <label htmlFor="maxPrice">Maximum Price</label>
-                    <input
-                        type="number"
-                        id="maxPrice"
-                        name="maxPrice"
-                        placeholder="Max Price"
-                        value={maxPrice}
-                        onChange={ (e) => setMaxPrice(e.target.value)}
-                    />
+                    <label htmlFor="minPrice">
+                        <span className="label-icon">💰</span> Price Range
+                    </label>
+                    <div className="input-group">
+                        <input
+                            type="number"
+                            id="minPrice"
+                            name="minPrice"
+                            placeholder="Min £"
+                            value={minPrice}
+                            onChange={handleNumberChange(setMinPrice)}
+                            min="0"
+                            className="enhanced-input"
+                        />
+                        <span className="input-separator">to</span>
+                        <input
+                            type="number"
+                            id="maxPrice"
+                            name="maxPrice"
+                            placeholder="Max £"
+                            value={maxPrice}
+                            onChange={handleNumberChange(setMaxPrice)}
+                            min="0"
+                            className="enhanced-input"
+                        />
+                    </div>
                 </div>
 
                 {/* Allows user to specify the number of bedrooms */}
@@ -152,7 +186,7 @@ function SearchPage({
                 {/* Allows users to search properties added after a specific date */}
                 <div className="search-group">
                     {/* Added after a specific date */}
-                    <label htmlFor="dateAdded">Date Added</label>
+                    <label htmlFor="dateAdded">Date Added</label>                    
                     <input
                         type="date"
                         id="dateAdded"
@@ -181,22 +215,6 @@ function SearchPage({
                 </button>
 
             </form>
-
-            {/*Drag source*/}
-            <h3>Drag a property into favourites</h3>
-
-            <div className="drag-source">
-                {properties.map((property) => (
-                    <div
-                       key={property.id}
-                       className="draggable-property"
-                       draggable
-                       onDragStart={(e) => handleDragStart(e, property)}
-                    >
-                       {property.type} – £{property.price.toLocaleString()}
-                    </div>
-                ))}
-            </div>
 
             {/*FAVOURITES DROP ZONE*/}
             <div
