@@ -152,3 +152,183 @@ body {
   transform: translateY(0);
 }
 
+/* RESULTS PAGE */
+
+/*Main container for the results page*/
+.results-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+
+/*Results page heading*/
+.results-page h2 {
+  font-size: 2rem;
+  color: #1a365d;
+  margin-bottom: 24px;
+  font-weight: 700;
+}
+
+/*Back to search link*/
+.results-page > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
+  margin-top: 20px;
+  transition: color 0.2s ease;
+}
+
+/*Hover effect for back link*/
+.results-page > a:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+/*container for list of property cards*/
+.results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Property Card - Results Page */
+.property-card {
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+/*hover effect for property card*/
+.property-card:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+}
+
+/*Image container*/
+.property-image {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+
+/*property image*/
+.property-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+/*zoom image on over*/
+.property-card:hover .property-image img {
+  transform: scale(1.05);
+}
+
+.property-details {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/*property price*/
+.property-details .price {
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: #1a365d;
+  margin: 0;
+}
+
+/*property small description*/
+.property-details .meta {
+  color: #475569;
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+/*emphasized labels in metadata*/
+.property-details .meta strong {
+  color: #334155;
+}
+
+/*Short description text*/
+.property-details .short-description {
+  color: #64748b;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 8px 0;
+}
+
+/*Card action buttons*/
+
+/*container for action buttons*/
+.card-actions {
+  display: flex;
+  gap: 14px;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid #e2e8f0;
+}
+
+/*view property buttons*/
+.view-property-details {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+/*hover effect for view button*/
+.view-property-details:hover {
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.35);
+}
+
+/*Favourites buttons*/
+
+/*Add to favourites button*/
+.fav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  background: #fef3c7;
+  color: #92400e;
+  border: 2px solid #f59e0b;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/*hover effect (when only enabled)*/
+.fav-btn:hover:not(:disabled) {
+  background: #fde68a;
+  border-color: #d97706;
+  transform: translateY(-2px);
+}
+
+/*disabled state when already added*/
+.fav-btn:disabled {
+  background: #dcfce7;
+  color: #166534;
+  border-color: #22c55e;
+  cursor: default;
+}
