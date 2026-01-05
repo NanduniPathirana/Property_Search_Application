@@ -152,6 +152,95 @@ body {
   transform: translateY(0);
 }
 
+/* REACT WIDGETS STYLING */
+
+/* React Select Styling */
+.react-select-container {
+  width: 100%;
+}
+/*Styles the dropdown input area*/
+.react-select__control {
+  border: 2px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  padding: 4px !important;
+  background-color: #f8fafc !important;
+  min-height: 45px !important;
+}
+/*Hover state for react select*/
+.react-select__control:hover {
+  border-color: #cbd5e1 !important;
+}
+/*Focused state for accessibility and feedback*/
+.react-select__control--is-focused {
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15) !important;
+  background-color: #ffffff !important;
+}
+/*Controls the popup menu styling*/
+.react-select__menu {
+  border-radius: 8px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+  z-index: 100;
+}
+/*Individual dropdown options*/
+.react-select__option {
+  padding: 10px 12px !important;
+}
+/*hovered option*/
+.react-select__option--is-focused {
+  background-color: #eff6ff !important;
+}
+/*selected option*/
+.react-select__option--is-selected {
+  background-color: #3b82f6 !important;
+}
+
+/* Price and Bedroom Selects Layout */
+.price-selects,
+.bedroom-selects {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+/*separator text between selects*/
+.price-separator,
+.bedroom-separator {
+  color: #64748b;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 0 5px;
+}
+/*ensures both selects take equal width*/
+.price-selects .react-select-container,
+.bedroom-selects .react-select-container {
+  flex: 1;
+}
+
+/* DatePicker Styling */
+.datepicker-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #334155;
+  background-color: #f8fafc;
+  transition: all 0.2s ease;
+}
+/*focus state forr date picker*/
+.datepicker-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+/*ensures date picker wrapper aligns correctly*/
+.react-datepicker-wrapper,
+.react-datepicker__input-container { 
+  width: 100%;
+}
+
+
 /* RESULTS PAGE */
 
 /*Main container for the results page*/
@@ -622,7 +711,7 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* ========== FAVOURITES ========== */
+/*  FAVOURITES  */
 .favourites-zone {
   background: linear-gradient(135deg, #fef3c7, #fde68a);
   padding: 25px;
@@ -631,23 +720,23 @@ body {
   min-height: 150px;
   transition: all 0.3s ease;
 }
-
+/*Hover effect gives feedback when interacting*/
 .favourites-zone:hover {
   border-color: #d97706;
   background: linear-gradient(135deg, #fde68a, #fcd34d);
 }
-
+/*Favourites heading*/
 .favourites-zone h3 {
   color: #92400e;
   margin: 0 0 15px;
   font-size: 1.3rem;
 }
-
+/*Placeholder text when no favourites exist*/
 .favourites-zone > p {
   color: #a16207;
   font-style: italic;
 }
-
+/*Represents one saved property in the favourites list*/
 .favourite-item {
   display: flex;
   justify-content: space-between;
@@ -661,12 +750,12 @@ body {
   color: #78350f;
   transition: all 0.2s ease;
 }
-
+/*Hover feedback for interactivity*/
 .favourite-item:hover {
   background: #fffbeb;
   box-shadow: 0 2px 8px rgba(245, 158, 11, 0.2);
 }
-
+/*Remove button inside favourite item*/
 .favourite-item button {
   background: transparent;
   border: none;
@@ -676,11 +765,11 @@ body {
   border-radius: 4px;
   transition: all 0.2s ease;
 }
-
+/*Hover state for delete button*/
 .favourite-item button:hover {
   background: #fef3c7;
 }
-
+/*Clear all favourites button*/
 .favourites-zone > button {
   margin-top: 15px;
   padding: 10px 20px;
@@ -693,27 +782,29 @@ body {
   cursor: pointer;
   transition: all 0.2s ease;
 }
-
+/*Hover feedback for clear button*/
 .favourites-zone > button:hover {
   background: #b91c1c;
 }
 
 /* RESPONSIVE DESIGN */
+/*Large screens*/
 @media (max-width: 1024px) {
   .property-card {
     grid-template-columns: 300px 1fr;
   }
 }
-
+/*Smaller than iPad screen*/
 @media (max-width: 768px) {
+  /*Reduce heading sizes for smaller screens*/
   .search-page h1 {
-    font-size: 1.8rem;
+    font-size: 1.8rem;   
   }
 
   .search-page h2 {
     font-size: 1rem;
   }
-
+  /* Single-column search form */
   .search-form {
     padding: 20px;
     grid-template-columns: 1fr;
@@ -722,15 +813,15 @@ body {
   .drag-source {
     grid-template-columns: 1fr;
   }
-
+  /* Stack cards vertically */
   .property-card {
     grid-template-columns: 1fr;
   }
-
+  /* Widescreen image ratio for mobile */
   .property-image {
     aspect-ratio: 16/9;
   }
-
+  /* Stack action buttons vertically */
   .card-actions {
     flex-direction: column;
   }
@@ -739,11 +830,11 @@ body {
   .fav-btn {
     width: 100%;
   }
-
+  /* Reduce image sizes */
   .image-section .main-image {
     height: 300px;
   }
-
+  
   .thumbnail-section .thumbnail {
     width: 80px;
     height: 55px;
@@ -752,7 +843,7 @@ body {
   .property-summary h3 {
     font-size: 1.8rem;
   }
-
+  /* Tabs stack vertically */
   .tab-buttons {
     flex-direction: column;
   }
@@ -760,11 +851,22 @@ body {
   .tab-buttons button {
     text-align: left;
   }
-
+  /* Favourites stack neatly on mobile */
   .favourite-item {
     flex-direction: column;
     gap: 10px;
     text-align: center;
+  }
+  /* Price & bedroom selects stack vertically */
+  .price-selects,
+  .bedroom-selects {
+    flex-direction: column;
+    gap: 8px;
+  }
+  /* Hide separators on small screens */
+  .price-separator,
+  .bedroom-separator {
+    display: none;
   }
 }
 
