@@ -488,6 +488,29 @@ body {
   border-color: #94a3b8;
 }
 
+/* Add Drop Zone */
+
+/*Drop zone for adding favourites via drag in*/
+.add-drop-zone {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  border: 3px dashed #f59e0b;
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  color: #92400e;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+/*hover feedback for add drop zone*/
+.add-drop-zone:hover {
+  background: linear-gradient(135deg, #fde68a, #fcd34d);
+  border-color: #d97706;
+}
+
+
 /* Remove Drop Zone */
 
 /*Drop zone for removing favourites via drag out*/
@@ -597,4 +620,197 @@ body {
   border-radius: 12px;
   border: none;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ========== FAVOURITES ========== */
+.favourites-zone {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  padding: 25px;
+  border-radius: 12px;
+  border: 2px dashed #f59e0b;
+  min-height: 150px;
+  transition: all 0.3s ease;
+}
+
+.favourites-zone:hover {
+  border-color: #d97706;
+  background: linear-gradient(135deg, #fde68a, #fcd34d);
+}
+
+.favourites-zone h3 {
+  color: #92400e;
+  margin: 0 0 15px;
+  font-size: 1.3rem;
+}
+
+.favourites-zone > p {
+  color: #a16207;
+  font-style: italic;
+}
+
+.favourite-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #fbbf24;
+  font-weight: 500;
+  color: #78350f;
+  transition: all 0.2s ease;
+}
+
+.favourite-item:hover {
+  background: #fffbeb;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.2);
+}
+
+.favourite-item button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.favourite-item button:hover {
+  background: #fef3c7;
+}
+
+.favourites-zone > button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: #dc2626;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.favourites-zone > button:hover {
+  background: #b91c1c;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 1024px) {
+  .property-card {
+    grid-template-columns: 300px 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .search-page h1 {
+    font-size: 1.8rem;
+  }
+
+  .search-page h2 {
+    font-size: 1rem;
+  }
+
+  .search-form {
+    padding: 20px;
+    grid-template-columns: 1fr;
+  }
+
+  .drag-source {
+    grid-template-columns: 1fr;
+  }
+
+  .property-card {
+    grid-template-columns: 1fr;
+  }
+
+  .property-image {
+    aspect-ratio: 16/9;
+  }
+
+  .card-actions {
+    flex-direction: column;
+  }
+
+  .view-property-details,
+  .fav-btn {
+    width: 100%;
+  }
+
+  .image-section .main-image {
+    height: 300px;
+  }
+
+  .thumbnail-section .thumbnail {
+    width: 80px;
+    height: 55px;
+  }
+
+  .property-summary h3 {
+    font-size: 1.8rem;
+  }
+
+  .tab-buttons {
+    flex-direction: column;
+  }
+
+  .tab-buttons button {
+    text-align: left;
+  }
+
+  .favourite-item {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-page {
+    padding: 20px 15px;
+  }
+
+  .search-page h1 {
+    font-size: 1.5rem;
+  }
+
+  .search-form > button {
+    font-size: 1rem;
+    padding: 12px 24px;
+  }
+
+  .results-page {
+    padding: 15px;
+  }
+
+  .results-page h2 {
+    font-size: 1.5rem;
+  }
+
+  .property-details {
+    padding: 20px;
+  }
+
+  property-details .price {
+    font-size: 1.5rem;
+  }
+
+  .property-page {
+    padding: 15px;
+  }
+
+  .property-summary {
+    padding: 20px;
+  }
+
+  .property-summary h3 {
+    font-size: 1.5rem;
+  }
+
+  .tab-content {
+    padding: 20px;
+  }
 }
