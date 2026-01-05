@@ -73,31 +73,10 @@ function SearchPage({
         //Navigate to results page
         navigate("/results")
     };
-        //Drag and Drop
-        const handleDragStart = (e, property) => {
-            e.dataTransfer.setData("propertyId", property.id);
-        };
-
-        const handleDropped = (e) => {
-            const propertyId = e.dataTransfer.getData("propertyId");
-            const draggedProperty = properties.find((p) => p.id === propertyId);
-            
-            if (
-              draggedProperty &&
-              !favourites.some((fav) => fav.id === draggedProperty.id)
-            ) {
-              setFavourites([...favourites, draggedProperty]);
-            }
-        };
-
-        const handleDropRemove = (e) => {
-           const propertyId = e.dataTransfer.getData("propertyId");
-           setFavourites(favourites.filter((fav) => fav.id !== propertyId));
-    };
 
     return (
         //Main container for the search pages
-        <div className="seaech-page">
+        <div className="search-page">
             <h1>Believe in Finding</h1>
             <h2>with the UK's largest choice of properties </h2>
 
@@ -222,8 +201,6 @@ function SearchPage({
             {/*FAVOURITES DROP ZONE*/}
             <div
                 className="favourites-zone"
-                onDragOver={(e) => e.preventDefault()}
-                onDrop={handleDropAdd}
             >
 
                 <h3>Favourites</h3>
@@ -234,12 +211,6 @@ function SearchPage({
                     <div
                         key={fav.id}
                         className="favourite-item"
-                        draggable
-                        onDragStart={(e) =>
-                            e.dataTransfer.setData("propertyId", fav.id)
-                        }
-                        onDrop={handleDropRemove}
-                        onDragOver={(e) => e.preventDefault()}
                     >
                         {fav.type} – £{fav.price.toLocaleString()}
 
