@@ -1,13 +1,30 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!--Character encoding-->
     <meta charset="UTF-8" />
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <!-- Responsive viewport for mobile & desktop -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--Content Secyurity Policy (CSP)-->
+    <meta 
+        http-equiv="Content-Security-Policy"
+        content="
+            default-src 'self';
+            script-src 'self';
+            style-src 'self' 'unsafe-inline';
+            img-src 'self' data:;
+            frame-src https://www.google.com https://maps.google.com;
+        "
+    />
+
     <title>property-search-application</title>
   </head>
   <body>
+    <!-- React root element -->
     <div id="root"></div>
+    <!-- React root element -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
