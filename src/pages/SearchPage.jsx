@@ -1,6 +1,15 @@
+// React hooks
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { sanitizePostcode, sanitizeNumber } from "../utils/security";
+
+//React UI widgets
+import Select from "react-select";
+import Slider from "rc-slider";
+import DatePicker from "react-datepicker";
+
+//Widgets styles
+import "react-datepicker/dist/react-datepicker.css";
+import "rc-slider/assets/index.css";
 
 //Search Page Component
 function SearchPage({ 
@@ -16,7 +25,7 @@ function SearchPage({
     //State variables for search criteria
 
     //Store selected property type
-    const [propertyType, setPropertyType] = useState("any")
+    const [propertyType, setPropertyType] = useState({ value: "any", label: "Any" })
     //Store minimum price
     const [minPrice, setMinPrice] = useState("");
     //Store maximum price
@@ -25,36 +34,87 @@ function SearchPage({
     const [minBedrooms, setMinBedrooms] = useState("");
     //Store maximum bedrooms
     const [maxBedrooms, setMaxBedrooms] = useState("");
-    //Store the selected date
-    const [dateAdded, setDateAdded] = useState("");
+    //Store the selected date (React Datepicker)
+    const [dateAdded, setDateAdded] = useState(null);
     //Store the postcode
     const [postCode, setPostcode] = useState("");
 
+    //Options for react-select
+    const propertyTypeOptions = [
+        { value: "any", label: "Any" },
+        { value: "house", label: "House" },
+        { value: "flat", label: "Flat" }
+    ];
+
+    // Options for bedrooms select
+    const bedroomOptions = [
+        { value: "", label: "Any" },
+        { value: "1", label: "1" },
+        { value: "2", label: "2" },
+        { value: "3", label: "3" },
+        { value: "4", label: "4" },
+        { value: "5", label: "5" },
+        { value: "6", label: "6+" }
+    ];
+
+    // Options for price select
+    const minPriceOptions = [
+        { value: "", label: "No min" },
+        { value: "50000", label: "£50,000" },
+        { value: "100000", label: "£100,000" },
+        { value: "150000", label: "£150,000" },
+        { value: "200000", label: "£200,000" },
+        { value: "250000", label: "£250,000" },
+        { value: "300000", label: "£300,000" },
+        { value: "400000", label: "£400,000" },
+        { value: "500000", label: "£500,000" },
+        { value: "750000", label: "£750,000" },
+        { value: "1000000", label: "£1,000,000" }
+    ];
+
+    const maxPriceOptions = [
+        { value: "", label: "No max" },
+        { value: "50000", label: "£50,000" },
+        { value: "100000", label: "£100,000" },
+        { value: "150000", label: "£150,000" },
+        { value: "200000", label: "£200,000" },
+        { value: "250000", label: "£250,000" },
+        { value: "300000", label: "£300,000" },
+        { value: "400000", label: "£400,000" },
+        { value: "500000", label: "£500,000" },
+        { value: "750000", label: "£750,000" },
+        { value: "1000000", label: "£1,000,000" },
+        { value: "1500000", label: "£1,500,000" }
+    ];
+
     //Create the search handler function 
     const handleSearch = () => {
-    
         const results = properties.filter((property) => {
 
-            //Property type match
-            const matchType = propertyType === "any" || property.type.toLowerCase() === propertyType;
+            //Match property type
+            const matchType = propertyType.value == "any" ||
+                property.type.toLowerCase() === propertyType.value;
 
-            //Price match
+            // Match price range
             const matchMinPrice = minPrice === "" || property.price >= Number(minPrice);
-      
             const matchMaxPrice = maxPrice === "" || property.price <= Number(maxPrice);
 
-            //Bedrooms match      
+            // Match bedrooms
             const matchMinBedrooms = minBedrooms === "" || property.bedrooms >= Number(minBedrooms);
-
             const matchMaxBedrooms = maxBedrooms === "" || property.bedrooms <= Number(maxBedrooms);
-    
-            //Postcode match
-            const matchPostcode = postCode === "" || property.location.toLowerCase().includes(postCode.toLowerCase());
 
-            //Date match
-            const propertyDate = new Date(`${property.added.month} ${property.added.day}, ${property.added.year}`);
+            // Match postcode
+            const matchPostcode =
+                postCode === "" ||
+                property.location.toLowerCase().includes(postCode.toLowerCase());
 
-            const matchDate = dateAdded === "" || propertyDate >= new Date(dateAdded);
+            // Match date added
+            const propertyDate = new Date(
+                `${property.added.month} ${property.added.day}, ${property.added.year}`
+            );
+
+            const matchDate =
+                !dateAdded || propertyDate >= dateAdded;
 
             //Return only if all conditions match
             return (
@@ -66,37 +126,13 @@ function SearchPage({
                 matchPostcode &&
                 matchDate
             );
-        })
+        });
 
         //Saved filtered results
         setFilteredProperties(results);
 
         //Navigate to results page
         navigate("/results")
-
-        // Clear all filters 
-        const handleClearFilters = () => {
-           setPropertyType("any");
-           setMinPrice("");
-           setMaxPrice("");
-           setMinBedrooms("");
-           setMaxBedrooms("");
-           setDateAdded("");
-           setPostcode("");
-        };
-
-        // Secure input handlers
-        const handlePostcodeChange = (e) => {
-            const sanitized = sanitizePostcode(e.target.value);
-            setPostcode(sanitized);
-        };
-
-        const handleNumberChange = (setter) => (e) => {
-            const value = e.target.value;
-            if (value === "" || (!isNaN(value) && Number(value) >= 0)) {
-                setter(value);
-            }
-        };
     };
 
 
@@ -105,107 +141,95 @@ function SearchPage({
         <div className="search-page">
             <h1>Believe in Finding</h1>
             <h2>with the UK's largest choice of properties </h2>
-
             <p>Search properties to buy</p>
 
             {/* Collect user inputs to search properties*/}
-            <form className="search-form">
+            <div className="search-form">
                 {/* Allows user to specify the type of property */}
                 <div className="search-group">
-                    <label htmlFor="propertyType">
-                        <span className="label-icon">🏠</span> Property Type
-                    </label>
-                    <select 
-                       id="propertyType" 
-                       name="propertyType"
-                       value={propertyType}
-                       onChange={ (e) => setPropertyType(e.target.value)}
-                    >
-                       <option value="house">House</option>
-                       <option value="flat">Flat</option>
-                       <option value="any">Any</option>
-                    </select>
+                    <label>Property Type</label>
+                    <Select
+                        options={propertyTypeOptions}
+                        value={propertyType}
+                        onChange={(option) => setPropertyType(option)}
+                        className="react-select-container"
+                        classNamePrefix="react-select"
+                    />
                 </div>
 
                 {/* Allows user to specify the price range */}
-                <div className="search-group">
-                    {/* Minimum price input */}
-                    <label htmlFor="minPrice">
-                        <span className="label-icon">💰</span> Price Range
-                    </label>
-                    <div className="input-group">
-                        <input
-                            type="number"
-                            id="minPrice"
-                            name="minPrice"
-                            placeholder="Min £"
-                            value={minPrice}
-                            onChange={handleNumberChange(setMinPrice)}
-                            min="0"
-                            className="enhanced-input"
+                <div className="search-group price-group">
+                    <label>Price</label>
+                    <div className="price-selects">
+                        <Select 
+                            options={minPriceOptions}
+                            placeholder="Min Price"
+                            onChange={(option) => setMinPrice(option ? option.value : "")}
+                            isClearable
+                            className="react-select-container"
+                            classNamePrefix="react-select"
                         />
-                        <span className="input-separator">to</span>
-                        <input
-                            type="number"
-                            id="maxPrice"
-                            name="maxPrice"
-                            placeholder="Max £"
-                            value={maxPrice}
-                            onChange={handleNumberChange(setMaxPrice)}
-                            min="0"
-                            className="enhanced-input"
+                        <span className="price-separator">to</span>
+                        <Select 
+                            options={maxPriceOptions}
+                            placeholder="Max Price"
+                            onChange={(option) => setMaxPrice(option ? option.value : "")}
+                            isClearable
+                            className="react-select-container"
+                            classNamePrefix="react-select"
                         />
-                    </div>
+                    </div>        
                 </div>
+            
 
                 {/* Allows user to specify the number of bedrooms */}
-                <div className="search-group">
-                    {/* Minimum bedrooms input */}
-                    <label htmlFor="minBedrooms">Minimum Bedrooms</label>
-                    <input 
-                        type="number"
-                        id="minBedrooms"
-                        name="minBedrooms"
-                        placeholder="Min Bedrooms"
-                        value={minBedrooms}
-                        onChange={ (e) => setMinBedrooms(e.target.value)}
-                    />
-
-                    {/* Maximum bedrooms input */}
-                    <label htmlFor="maxBedrooms">Maximum Bedrooms</label>
-                    <input 
-                        type="number"
-                        id="maxBedrooms"
-                        name="maxBedrooms"
-                        placeholder="Max Bedrooms"
-                        value={maxBedrooms}
-                        onChange={ (e) => setMaxBedrooms(e.target.value)}
-                    />
+                <div className="search-group bedrooms-group">
+                    <label>Bedrooms</label>
+                    <div className="bedroom-selects">
+                        <Select 
+                            options={bedroomOptions}
+                            placeholder="Min"
+                            onChange={(option) => setMinBedrooms(option ? option.value : "")}
+                            isClearable
+                            className="react-select-container"
+                            classNamePrefix="react-select"
+                        />
+                        <span className="bedroom-separator">to</span>
+                        <Select 
+                            options={bedroomOptions}
+                            placeholder="Max"
+                            onChange={(option) => setMaxBedrooms(option ? option.value : "")}
+                            isClearable
+                            className="react-select-container"
+                            classNamePrefix="react-select"
+                        />
+                    </div>
                 </div>
 
                 {/* Allows users to search properties added after a specific date */}
                 <div className="search-group">
                     {/* Added after a specific date */}
-                    <label htmlFor="dateAdded">Date Added</label>                    
-                    <input
-                        type="date"
-                        id="dateAdded"
-                        name="dateAdded"
-                        value={dateAdded}
-                        onChange={ (e) => setDateAdded(e.target.value)}
+                    <label>Date Added</label>                    
+                    <DatePicker
+                        selected={dateAdded}
+                        onChange={(date) => setDateAdded(date)}
+                        placeholderText="Select date"
+                        dateFormat="dd/MM/yyyy"
+                        className="datepicker-input"
+                        maxDate={new Date()}
                     />
                 </div>
 
                 {/* Allows users to enter the 1st part of the postcode */}
                 <div className="search-group">
-                    <label htmlFor="postCode">Postcode</label>
+                    <label>Postcode</label>
                     <input
                         type="text"
-                        id="postcode"
                         name="postcode"
                         placeholder="e.g.-BR1, NW1"
                         value={postCode}
                         onChange={ (e) => setPostcode(e.target.value)}
+                        maxLength="10"
                     />
                 </div>
 
@@ -213,25 +237,23 @@ function SearchPage({
                 <button type="button" onClick={handleSearch}>
                     Search Properties
                 </button>
-
-            </form>
+            </div>
+            
 
             {/*FAVOURITES DROP ZONE*/}
-            <div
-                className="favourites-zone"
-            >
-
+            <div className="favourites-zone">
                 <h3>Favourites</h3>
 
                 {favourites.length === 0 && <p>No favourites yet</p>}
 
                 {favourites.map((fav) => (
-                    <div
-                        key={fav.id}
-                        className="favourite-item"
-                    >
-                        {fav.type} – £{fav.price.toLocaleString()}
-
+                    <div key={fav.id} className="favourite-item">
+                        <div className="favourite-details">
+                            <strong>{fav.type}</strong> – £{fav.price.toLocaleString()}
+                            <br />
+                            <span className="favourite-location">{fav.location}</span>
+                        </div>
+                        
                         <button
                             onClick={() =>
                                 setFavourites(favourites.filter((f) => f.id !== fav.id))
