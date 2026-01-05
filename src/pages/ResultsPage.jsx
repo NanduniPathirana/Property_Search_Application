@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 //Results page component
-function ResultsPage({filteredProperties, favourites, setFavoourites}) {
+function ResultsPage({filteredProperties, favourites, setFavourites}) {
     
         // Add property to favourites (only once)
         const addToFavourites = (property) => {
             const alreadyAdded = favourites.some((fav) => fav.id === property.id);
 
             if (!alreadyAdded) {
-                setFavoourites([...favourites, property]);
+                setFavourites([...favourites, property]);
             }
         };
         // Handle case where no results are found
@@ -41,12 +41,12 @@ function ResultsPage({filteredProperties, favourites, setFavoourites}) {
                             <div className="property-details">
                                 {/*Price*/}
                                 <h3 className="price">
-                                    {property.price.toLocaleString()}
+                                    £{property.price.toLocaleString()}
                                 </h3>
 
                                 {/*Property information*/}
                                 <p className="meta">
-                                    <strong>Type:</strong> {property.type}
+                                    <strong>Type:</strong> {property.type} <br />
                                     <strong>Bedrooms:</strong> {property.bedrooms} <br />
                                     <strong>Location:</strong> {property.location}
                                 </p>

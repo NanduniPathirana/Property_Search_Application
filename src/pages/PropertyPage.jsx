@@ -7,6 +7,9 @@ function PropertyPage({properties, favourites, setFavourites}) {
     const { id } = useParams();
 
     //Find the selected property from JSON data
+    if (!properties || properties.length === 0) {
+        return <p>Loading property...</p>;
+    }
     const property = properties.find((p) => p.id === id);
 
     //if property is not found
@@ -24,16 +27,24 @@ function PropertyPage({properties, favourites, setFavourites}) {
     const isFavourite = favourites.some((fav) => fav.id === property.id);
 
     //Add to favourites (only once)
-    const addToFavourites = () => {
+    const addToFavourites =() => {
         if (!isFavourite) {
+            setFavourites([...favourites, property]);
+        }
+    };
+    const handleDropAdd = (e) => {
+        e.preventDefault();
+        const draggedId = e.dataTransfer.getData("propertyId");
+
+        if (draggedId === property.id && !isFavourite) {
             setFavourites([...favourites, property]);
         }
     };
 
     //Remove from favourites
-    const removeFromFavourites = () => {
+    function removeFromFavourites() {
         setFavourites(favourites.filter((fav) => fav.id !== property.id));
-    };
+    }
 
     //Clear all favourites
     const clearFavourites = () => {
@@ -47,8 +58,10 @@ function PropertyPage({properties, favourites, setFavourites}) {
 
     //Drop handler(remove when dragged out)
     const handleDropRemove = (e) => {
+        e.preventDefault();
         const draggedId = e.dataTransfer.getData("propertyId");
-        if (draggedId === property.id) {
+
+        if (draggedId === property.id && isFavourite) {
             removeFromFavourites();
         }
     };
@@ -85,30 +98,45 @@ function PropertyPage({properties, favourites, setFavourites}) {
 
                 {/*Favourite Button*/}
                 {!isFavourite ? (
-                    <button onClick={addToFavourites}>
+                    <button 
+                        draggable
+                        onDragStart={handleDragStart}
+                        onClick={addToFavourites}
+                    >        
                         ❤️ Add to Favourites
                     </button>
                 ) : (
-                  <button onClick={removeFromFavourites}>
-                    ❌ Remove from Favourites 
-                  </button>
-                )}
-
-                {favourites.length > 0 && (
-                    <button onClick={clearFavourites}>
-                        Clear All Favourites
+                    <button 
+                        draggable
+                        onDragStart={handleDragStart}
+                        onClick={removeFromFavourites}
+                    >
+                        ❌ Remove from Favourites 
                     </button>
                 )}
             </div>
 
-            <div 
-               className="remove-drop-zone"
-               onDragOver={(e) => e.preventDefault()}
-               onDrop={handleDropRemove}
-            >
-                Drag here to remove from favourites
-            </div>
-            
+            {/* ADD DROP ZONE */}
+            {!isFavourite && (
+                <div
+                    className="add-drop-zone"
+                    onDragOver={(e) => e.preventDefault()}
+                    onDrop={handleDropAdd}
+                >
+                    Drop here to add to favourites
+                </div>
+            )}
+
+            {/* REMOVE DROP ZONE */}
+            {isFavourite && (
+                <div
+                    className="remove-drop-zone"
+                    onDragOver={(e) => e.preventDefault()}
+                    onDrop={handleDropRemove}
+                >
+                    Drag here to remove from favourites
+                </div>
+            )}           
 
             {/*React tabs for description, floorplan, and map*/}
             <div className="tabs">
