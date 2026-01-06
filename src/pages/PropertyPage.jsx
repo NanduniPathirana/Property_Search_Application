@@ -92,13 +92,14 @@ function PropertyPage({properties, favourites, setFavourites}) {
             {/*Property short description*/}
             <div className="property-summary">
                 <h2>{property.type}</h2>
-                <h3>{property.price.toLocaleString()}</h3>
+                <h3>£{property.price.toLocaleString()}</h3>
                 <p>{property.location}</p>
             
 
                 {/*Favourite Button*/}
                 {!isFavourite ? (
                     <button 
+                        aria-label="add-to-favourites-button"
                         draggable
                         onDragStart={handleDragStart}
                         onClick={addToFavourites}
@@ -107,6 +108,7 @@ function PropertyPage({properties, favourites, setFavourites}) {
                     </button>
                 ) : (
                     <button 
+                        aria-label="remove-from-favourites-button"
                         draggable
                         onDragStart={handleDragStart}
                         onClick={removeFromFavourites}

@@ -149,6 +149,7 @@ function SearchPage({
                 <div className="search-group">
                     <label>Property Type</label>
                     <Select
+                        aria-label="property-type-select"
                         options={propertyTypeOptions}
                         value={propertyType}
                         onChange={(option) => setPropertyType(option)}
@@ -253,7 +254,7 @@ function SearchPage({
                             <br />
                             <span className="favourite-location">{fav.location}</span>
                         </div>
-                        
+
                         <button
                             onClick={() =>
                                 setFavourites(favourites.filter((f) => f.id !== fav.id))
