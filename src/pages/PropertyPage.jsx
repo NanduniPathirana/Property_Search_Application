@@ -1,5 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState } from "react";
+import { getImage } from "../utils/imageLoader";
+
 
 //Property page component
 function PropertyPage({properties, favourites, setFavourites}) {
@@ -70,7 +72,7 @@ function PropertyPage({properties, favourites, setFavourites}) {
         <div className="property-page">
             <div className="image-section">
                 <img 
-                   src={mainImage}
+                   src={getImage(mainImage)}
                    alt="Main property view"
                    className="main-image"
                 />
@@ -81,7 +83,7 @@ function PropertyPage({properties, favourites, setFavourites}) {
                 {property.images.map((img, index) => (
                     <img 
                        key={index}
-                       src={img}
+                       src={getImage(img)}
                        alt={`property view ${index + 1}`}
                        className="thumbnail"
                        onClick={() => setMainImage(img)}
@@ -169,7 +171,7 @@ function PropertyPage({properties, favourites, setFavourites}) {
                     {activeTab === "floorplan" && (
                         <div>
                             <img 
-                               src={property.floorPlan}
+                               src={getImage(property.floorPlan)}
                                alt="Floor plan"
                                className="floor-plan"
                             />

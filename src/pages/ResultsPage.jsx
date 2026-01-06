@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { getImage } from "../utils/imageLoader";
+
 //Results page component
 function ResultsPage({filteredProperties, favourites, setFavourites}) {
     
@@ -32,7 +34,7 @@ function ResultsPage({filteredProperties, favourites, setFavourites}) {
                             {/* Property Main image */}
                             <div className="property-image">
                                 <img 
-                                   src={property.picture}
+                                   src={getImage(property.picture)}
                                    alt={property.type}
                                 />
                             </div>
