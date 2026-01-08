@@ -5,6 +5,9 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   base: '/Property_Search_Application/',
+  build: {
+    outDir: 'docs'
+  },
   
   test: {
     environment: "jsdom",      // Browser-like environment

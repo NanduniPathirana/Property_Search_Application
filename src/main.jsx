@@ -20,7 +20,7 @@ createRoot(document.getElementById('root')).render(
   //Wraps the entire application to help catch common issues
   <StrictMode>
     {/*BrowserRouter wraps App to enable react router navigation*/}
-    <BrowserRouter basename="/Property_Search_Application/">
+    <BrowserRouter basename="/Property_Search_Application">
       {/*Controls routing and state*/}
        <App />
     </BrowserRouter>
