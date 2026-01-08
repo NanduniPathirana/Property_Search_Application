@@ -4,7 +4,14 @@ import PropertyPage from "../pages/PropertyPage";
 
 test("Property page loads correct property details", () => {
   const properties = [
-    { id: "p1", type: "House", price: 300000, location: "London", description: "Test description", images: [], picture: "" }
+    { id: "p1", 
+      type: "House", 
+      price: 300000, 
+      location: "London", 
+      description: "Test description", 
+      images: [], 
+      picture: null, 
+    }
   ];
 
   render(

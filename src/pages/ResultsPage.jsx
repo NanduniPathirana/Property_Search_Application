@@ -35,7 +35,7 @@ function ResultsPage({filteredProperties, favourites, setFavourites}) {
                             <div className="property-image">
                                 <img 
                                    src={getImage(property.picture)}
-                                   alt={property.type}
+                                   alt={property.type || "property image"}
                                 />
                             </div>
 
@@ -55,7 +55,7 @@ function ResultsPage({filteredProperties, favourites, setFavourites}) {
 
                                 {/*Property description*/}
                                 <p className="short-description">
-                                    {property.description.substring(0,150)}...
+                                    {(property.description || "").substring(0,150)}...
                                 </p>
 
                                 {/*Buttons*/}

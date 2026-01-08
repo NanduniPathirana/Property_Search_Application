@@ -12,10 +12,12 @@
         http-equiv="Content-Security-Policy"
         content="
             default-src 'self';
-            script-src 'self';
-            style-src 'self' 'unsafe-inline';
-            img-src 'self' data:;
+            script-src 'self' 'unsafe-inline' 'unsafe-eval' https://nandunipathirana.github.io;
+            style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+            font-src 'self' https://fonts.gstatic.com;
+            img-src 'self' data: https: blob:;
             frame-src https://www.google.com https://maps.google.com;
+            connect-src 'self' https://nandunipathirana.github.io;
         "
     />
 
